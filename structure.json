@@ -1,23 +1,33 @@
 {
-	"title": "",
-	"author": "",
-	"course_name": "",
-	"date": "",
-	"chapter_list": [
-		{
-			"chapter_title": "",
-			"chapter_intro": "",
-			"sections": [
-				{
-					"sub_title": "",
-					"sub_content": "",
-					"figure_path": "",
-					"code_path": "",
-					"code_language": "",
-					"output_path": "",
-					"analysis": ""
-				}
-			]
-		}
-	]
+    "title": "",
+    "author": "",
+    "course_name": "",
+    "date": "",
+    "chapter_list": [
+        {
+            "chapter_title": "",
+            "chapter_intro": "",
+            "sections": [
+                {
+                    "sub_title": "",
+                    "sub_content": "",
+                    "figure_path": "",
+                    "code_path": "",
+                    "code_language": "",
+                    "output_path": "",
+                    "analysis": ""
+                },
+                {
+                    "sub_title": "",
+                    "sub_content": "",
+                    "figure_path": "",
+                    "code_path": "",
+                    "code_language": "",
+                    "output_path": "",
+                    "analysis": ""
+                }
+            ]
+        }
+    ]
 }
+

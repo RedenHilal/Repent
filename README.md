@@ -4,11 +4,11 @@ Report automation with latex and jinja using [sleek template](https://github.com
 
 ## Set up
 
-1. git clone https://github.com/RedenHilal/Repent.git
-2. chmod +x repent.py
-3. sudo ln -s "$(pwd)/repent.py" /usr/local/bin/repent
-4. python -m venv .venv
-5. lastly, install jinja2 on the virtual env
+1. `git clone https://github.com/RedenHilal/Repent.git`
+2. `chmod +x repent.py`
+3. `sudo ln -s "$(pwd)/repent.py" /usr/local/bin/repent`
+4. `python -m venv .venv`
+5. `lastly, install jinja2 on the virtual env`
 
 ## Get Started
 
