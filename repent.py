@@ -5,6 +5,7 @@ import subprocess
 from pathlib import Path
 from jinja2 import Environment, FileSystemLoader
 
+
 def main():
     parser = argparse.ArgumentParser(description="Generate LaTeX reports from JSON.")
     parser.add_argument("-j", "--json", required=True, help="Path to the input JSON file")
@@ -18,6 +19,9 @@ def main():
     output_dir = output_pdf_path.parent
     output_tex_path = output_dir / f"{output_pdf_path.stem}.tex"
     script_dir = Path(args.template).parent
+
+    envv = os.environ.copy()
+    envv['TEXINPUTS'] = f"{output_dir}:" + envv.get('TEXINPUTS', "")
 
     # Load JSON data
     with open(json_path, 'r', encoding='utf-8') as f:
@@ -46,12 +50,12 @@ def main():
         "pdflatex",
         "-interaction=nonstopmode",
         f"-output-directory={output_dir}",
-        str(output_tex_path)
+        str(output_tex_path),
     ]
     
     # Run pdflatex (often requires two passes for TOC and references)
-    subprocess.run(compile_cmd, cwd=script_dir, check=False)
-    subprocess.run(compile_cmd, cwd=script_dir, check=False)
+    subprocess.run(compile_cmd, cwd=script_dir, check=False, env=envv)
+    subprocess.run(compile_cmd, cwd=script_dir, check=False, env=envv)
 
     print(f"[+] Success! Report generated at {output_pdf_path}")
 

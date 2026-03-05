@@ -87,10 +87,11 @@
         \end{figure}
         {% endif %}
 
-        {% if sec.code %}
+        {% if sec.code_path %}
         % sleek-listings likely configures lstlisting
-        \begin{lstinputlisting}{% if sec.code_language %}[language={{ sec.code_language }}]{% endif %}
-{{ sec.code }}
+		\begin{lstinputlisting}{% if sec.code_language %}[language={{ sec.code_language }}]{% endif %}{ {{sec.code_path}} }
+		\end{lstinputlisting}
+
 		{% if sec.output_path %}
 		\begin{figure}[H!]
 			\centering
