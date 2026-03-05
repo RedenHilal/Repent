@@ -81,9 +81,9 @@
         {% endif %}
 
         {% if sec.figure_path %}
-        \begin{figure}[H!]
+        \begin{figure}[h!]
             \centering
-            \includegraphics[width=0.8\textwidth]{ {{- sec.figure_path -}} }
+            \includegraphics[width=0.4\textwidth]{ {{- sec.figure_path -}} }
         \end{figure}
         {% endif %}
 
@@ -93,9 +93,9 @@
 		\end{lstinputlisting}
 
 		{% if sec.output_path %}
-		\begin{figure}[H!]
+		\begin{figure}[h!]
 			\centering
-			\includegraphics[width=0.8\textwidth]{ {{- sec.output_path -}} }
+			\includegraphics[width=0.4\textwidth]{ {{- sec.output_path -}} }
 		\end{figure}
 		{% endif %}
         {% endif %}

@@ -16,7 +16,7 @@ Report automation with latex and jinja using [sleek template](https://github.com
 2. Prepare your data with the structure of `structure.json`.
 3. Launch it!
 
-exmaple
+example
 
 ```
 repent -j data.json -o report.pdf
