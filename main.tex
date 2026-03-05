@@ -1,0 +1,111 @@
+\documentclass[a4paper,12pt]{report}
+
+%%%%%%%%%%%%
+% Packages %
+%%%%%%%%%%%%
+
+\usepackage[english]{babel}
+\usepackage{graphicx} % Added for figure integration
+\usepackage{packages/sleek}
+\usepackage{packages/sleek-title}
+\usepackage{packages/sleek-theorems}
+\usepackage{packages/sleek-listings}
+
+%%%%%%%%%%%%%%
+% Title-page %
+%%%%%%%%%%%%%%
+
+\logo{./resources/logo.png}
+\institute{Politeknik Elektronika Negeri Surabaya}
+\faculty{Departmen Teknik Informatika dan Komputer}
+
+% Jinja: Title and Course Name mapping
+\title{ {{- title -}} }
+{% if course_name %}
+\subtitle{ {{- course_name -}} }
+{% else %}
+\subtitle{Assignment Report}
+{% endif %}
+
+% Jinja: Author mapping
+\author{\textit{Author}\\ {{- author -}} }
+%\supervisor{Linus \textsc{Torvalds}}
+%\context{A long time ago in a galaxy far, far away...}
+
+% Jinja: Date mapping
+{% if date %}
+\date{ {{- date -}} }
+{% else %}
+\date{\today}
+{% endif %}
+
+%%%%%%%%%%%%%%%%
+% Bibliography %
+%%%%%%%%%%%%%%%%
+
+\addbibresource{./resources/bib/references.bib}
+
+%%%%%%%%%%
+% Macros %
+%%%%%%%%%%
+
+\def\tbs{\textbackslash}
+
+%%%%%%%%%%%%
+% Document %
+%%%%%%%%%%%%
+
+\begin{document}
+    \maketitle
+
+    \clearpage
+    \pagenumbering{roman}
+    \tableofcontents
+    \clearpage
+    \pagenumbering{arabic}
+
+    % Jinja: Chapter Loop
+    {% for chapter in chapter_list %}
+    \chapter{ {{- chapter.chapter_title -}} }
+    
+    {% if chapter.chapter_intro %}
+    {{ chapter.chapter_intro }}
+    {% endif %}
+
+        % Jinja: Section Loop
+        {% for sec in chapter.sections %}
+        \section{ {{- sec.sub_title -}} }
+        
+        {% if sec.sub_content %}
+        {{ sec.sub_content }}
+        {% endif %}
+
+        {% if sec.figure_path %}
+        \begin{figure}[H!]
+            \centering
+            \includegraphics[width=0.8\textwidth]{ {{- sec.figure_path -}} }
+        \end{figure}
+        {% endif %}
+
+        {% if sec.code %}
+        % sleek-listings likely configures lstlisting
+        \begin{lstinputlisting}{% if sec.code_language %}[language={{ sec.code_language }}]{% endif %}
+{{ sec.code }}
+		{% if sec.output_path %}
+		\begin{figure}[H!]
+			\centering
+			\includegraphics[width=0.8\textwidth]{ {{- sec.output_path -}} }
+		\end{figure}
+		{% endif %}
+        {% endif %}
+
+        {% if sec.analysis %}
+        \subsection*{Analysis}
+        {{ sec.analysis }}
+        {% endif %}
+
+        {% endfor %}
+        
+    {% endfor %}
+
+\end{document}
