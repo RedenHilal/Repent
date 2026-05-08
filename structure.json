@@ -14,6 +14,8 @@
                     "figure_path": "",
                     "code_path": "",
                     "code_language": "",
+                    "code_start_line": "",
+                    "code_end_line": "",
                     "output_path": "",
                     "analysis": ""
                 },
@@ -23,6 +25,8 @@
                     "figure_path": "",
                     "code_path": "",
                     "code_language": "",
+                    "code_start_line": "",
+                    "code_end_line": "",
                     "output_path": "",
                     "analysis": ""
                 }

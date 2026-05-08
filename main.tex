@@ -20,15 +20,15 @@
 \faculty{Departmen Teknik Informatika dan Komputer}
 
 % Jinja: Title and Course Name mapping
-\title{ {{- title -}} }
+\title{ {{- title | latex_escape -}} }
 {% if course_name %}
-\subtitle{ {{- course_name -}} }
+\subtitle{ {{- course_name | latex_escape -}} }
 {% else %}
 \subtitle{Assignment Report}
 {% endif %}
 
 % Jinja: Author mapping
-\author{\textit{Author}\\ {{- author -}} }
+\author{\textit{Author}\\ {{- author | latex_escape -}} }
 %\supervisor{Linus \textsc{Torvalds}}
 %\context{A long time ago in a galaxy far, far away...}
 
@@ -66,7 +66,7 @@
 
     % Jinja: Chapter Loop
     {% for chapter in chapter_list %}
-    \chapter{ {{- chapter.chapter_title -}} }
+    \chapter{ {{- chapter.chapter_title | latex_escape -}} }
     
     {% if chapter.chapter_intro %}
     {{ chapter.chapter_intro }}
@@ -74,30 +74,30 @@
 
         % Jinja: Section Loop
         {% for sec in chapter.sections %}
-        \section{ {{- sec.sub_title -}} }
+        \section{ {{- sec.sub_title | latex_escape -}} }
         
         {% if sec.sub_content %}
         {{ sec.sub_content }}
         {% endif %}
 
         {% if sec.figure_path %}
-        \begin{figure}[h!]
+        \begin{figure}[H]
             \centering
-            \includegraphics[width=0.4\textwidth]{ {{- sec.figure_path -}} }
+            \includegraphics[width=0.7\textwidth]{ {{- sec.figure_path -}} }
         \end{figure}
         {% endif %}
 
         {% if sec.code_path %}
-        % sleek-listings likely configures lstlisting
-		\begin{lstinputlisting}{% if sec.code_language %}[language={{ sec.code_language }}]{% endif %}{ {{sec.code_path}} }
-		\end{lstinputlisting}
+        {% set has_opts = sec.code_language or sec.code_start_line or sec.code_end_line %}
+        \lstinputlisting{% if has_opts %}[{% if sec.code_language %}language={{ sec.code_language }}{% endif %}{% if sec.code_start_line %}{% if sec.code_language %},{% endif %}firstline={{ sec.code_start_line }}{% endif %}{% if sec.code_end_line %}{% if sec.code_language or sec.code_start_line %},{% endif %}lastline={{ sec.code_end_line }}{% endif %}]{% endif %}{ {{- sec.code_path -}} }
+        \end{lstinputlisting}
 
-		{% if sec.output_path %}
-		\begin{figure}[h!]
-			\centering
-			\includegraphics[width=0.4\textwidth]{ {{- sec.output_path -}} }
-		\end{figure}
-		{% endif %}
+        {% if sec.output_path %}
+        \begin{figure}[h!]
+            \centering
+            \includegraphics[width=0.4\textwidth]{ {{- sec.output_path -}} }
+        \end{figure}
+        {% endif %}
         {% endif %}
 
         {% if sec.analysis %}
